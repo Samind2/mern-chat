@@ -3,7 +3,7 @@ import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import cloudinary from '../lib/cloudinary.js';
 import jwt from 'jsonwebtoken';
-const secret = process.env.JWT_SECRET;
+const secret = process.env.JWT_SECRET; // ดึงค่าคีย์ลับของ JWT .env ที่กำหนดไว้
 
 // สร้างฟังก์ชัน signup
 export const signup = async (req, res) => {
@@ -27,13 +27,13 @@ export const signup = async (req, res) => {
             password: hashedPassword,
         });
         if(newUser) {
-            
-            const token = generateToken(newUser._id, res);
+           
+            const token = generateToken(newUser._id, res); //สร้าง token
             await newUser.save(); //save user to database
             console.log(token);
             
             
-            res.status(201).json({ _id:newUser._id, fullName:newUser.fullName, email:newUser.email, profilePic:newUser.profilePic });
+            res.status(201).json({ _id:newUser._id, fullName:newUser.fullName, email:newUser.email, profilePic:newUser.profilePic }); //ส่ง response กลับไปที่ client
         }else{
             res.status(400).json({ message: "Invalid user data}" });
         }
@@ -102,6 +102,7 @@ export const updateProfile = async (req, res) => {
     try {
         const {profilePic} = req.body;
         //const userId = req.user._Id;
+        // รับค่า id จาก params
         const {id: userId} = req.params;
         //check if profile picture is uploaded
         if(!profilePic) {
