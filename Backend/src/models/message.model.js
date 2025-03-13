@@ -15,5 +15,5 @@ const messageSchema = new Schema(
 );
 
 //สร้างModel
-const Message = mongoose.model("Message", userSchema);
+const Message = mongoose.model("Message", messageSchema);
 export default Message;
