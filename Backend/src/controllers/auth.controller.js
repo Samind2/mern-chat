@@ -55,14 +55,12 @@ export const signin = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found!" });
     }
-
     // ตรวจสอบว่า password ที่ส่งมาตรงกับ password ในฐานข้อมูลหรือไม่
     const isValidPassword = await bcrypt.compare(password, user.password);
     // เช็คว่าถ้า password ไม่ตรงกัน 
     if (!isValidPassword) {
       return res.status(401).json({ message: "Invalid Password" });
     }
-
     // สร้าง token
     const token = jwt.sign(
       { id: user._id, email: user.email },
@@ -103,7 +101,7 @@ export const updateProfile = async (req, res) => {
         const {profilePic} = req.body;
         //const userId = req.user._Id;
         // รับค่า id จาก params
-        const {id: userId} = req.params;
+        const {id: userId} = req.user._id;
         //check if profile picture is uploaded
         if(!profilePic) {
             return res.status(400).json({ message: "Profile picture is required" });
