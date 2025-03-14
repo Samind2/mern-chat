@@ -8,7 +8,7 @@ const userSchema = new Schema(
     fullName: { type: String, required: true },
     password: { type: String, required: true },
     profilePic: { type: String, default: "" },
-    friend: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    friends: [{ type: Schema.Types.ObjectId, ref: "User" }],
     friendRequests: [{ type: Schema.Types.ObjectId, ref: "User" }],
   },
   {

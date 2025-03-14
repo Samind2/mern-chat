@@ -32,6 +32,13 @@ io.on("connection", (socket) => {
   //แจ้ง/ส่งสัญญาณให้ผู้ใช้
   io.emit("getOnlineUsers", Object.keys(userSocketMap));
 
+  socket.on("friendRequestSent", (friendId) => {
+    const receiverSocketId = getReceiverSocketId(friendId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("friendRequestReceived", userId);
+    }
+  })
+
   //ลบคนที่ Disconnect ออก ส่งว่าdisconnect
   socket.on("disconnect", () => {
     console.log("A User disconnected", socket.id);

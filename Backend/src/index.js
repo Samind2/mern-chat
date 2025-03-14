@@ -6,6 +6,7 @@ import { connectDB } from "./lib/db.js";
 import authRouter from "./routes/auth.router.js";
 import {app, server} from "./lib/socket.js"
 import messageRouter from "./routes/message.router.js"
+import friendRouter from "./routes/friend.router.js"
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/message", messageRouter);
+app.use("/api/v1/friend", friendRouter);
 
 server.listen(PORT, () => {
   console.log("Server is running on port HTTP://localhost:" + PORT);
