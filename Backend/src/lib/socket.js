@@ -39,6 +39,14 @@ io.on("connection", (socket) => {
     }
   })
 
+  socket.on("friendRequestAccepted", (friendId) => {
+    const receiverSocketId = getReceiverSocketId(friendId);
+    if (receiverSocketId) {
+        io.to(receiverSocketId).emit("friendRequestAccepted", userId);
+    }
+});
+
+
   //ลบคนที่ Disconnect ออก ส่งว่าdisconnect
   socket.on("disconnect", () => {
     console.log("A User disconnected", socket.id);
