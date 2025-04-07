@@ -18,6 +18,6 @@ export const generateToken = (userId, res) => {
     // CSRF
     sameSite: "strict",
     // https ?
-    secure: NODE_MODE !== "development",
+    secure: NODE_MODE !== "production", 
   });
 };
