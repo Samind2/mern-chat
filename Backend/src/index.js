@@ -21,7 +21,7 @@ app.use(cors({
 }));
 
 app.get("/", (req, res) => {
-  res.send("h1>Restfull Service for Mern chat Project</h1>");
+  res.send("<h1>Restfull Service for Mern chat Project</h1>");
 });
 
 app.use("/api/v1/auth", authRouter);
